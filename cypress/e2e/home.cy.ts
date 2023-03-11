@@ -1,26 +1,28 @@
-describe('Home Page Spec', () => {
+describe("Home Page Spec", () => {
   beforeEach(() => {
-    cy.visit('')
-  })
+    cy.visit("");
+  });
 
-  it('should increment counter correctly', () => {
-    const times = 10
-    const incrementButton = cy.get('[data-cy="increment-button"]')
-    for (let i = 0; i < times; i++) {
-      incrementButton.click()
-    }
+  it("should increment counter correctly", () => {
+    const redButton = cy.get(":nth-child(1) > .sc-eDvSVe");
+    const greenButton = cy.get(":nth-child(2) > .sc-eDvSVe");
+    const blueButton = cy.get(":nth-child(3) > .sc-eDvSVe");
+    const alphaButton = cy.get(":nth-child(4) > .sc-eDvSVe");
 
-    cy.get('[data-cy="counter-value"]').should('have.text', times)
-  })
+    redButton.invoke("val", 200).trigger("change");
+    greenButton.invoke("val", 100).trigger("change");
+    blueButton.invoke("val", 255).trigger("change");
+    alphaButton.invoke("val", 1).trigger("change");
+    // cy.get("@range").siblings("p").should("have.text", "25");
+    // const times = 10
+    // const incrementButton = cy.get('[data-cy="increment-button"]')
+    // for (let i = 0; i < times; i++) {
+    //   incrementButton.click()
+    // }
+    // cy.get('[data-cy="counter-value"]').should('have.text', times)
 
-  it('should reset counter correctly', () => {
-    const times = 10
-    const incrementButton = cy.get('[data-cy="increment-button"]')
-    for (let i = 0; i < times; i++) {
-      incrementButton.click()
-    }
+    const colorPanel = cy.get('[data-cy="color-panel"]');
 
-    cy.get('[data-cy="reset-button"]').click()
-    cy.get('[data-cy="counter-value"]').should('have.text', 0)
-  })
-})
+    colorPanel.should("have.css", "background-color", `rgba(200, 100, 255, 1)`);
+  });
+});
